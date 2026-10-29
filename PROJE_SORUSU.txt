@@ -1,0 +1,477 @@
+C# PROJESİ
+OKUL ETKİNLİK KAYIT SİSTEMİ
+========================================
+
+1. PROJENİN AMACI
+-----------------
+
+Bu projede okulda düzenlenen etkinlikleri ve bu etkinliklere katılmak isteyen
+öğrencilerin kayıtlarını yöneten bir konsol uygulaması geliştirmeniz
+beklenmektedir.
+
+Projede aşağıdaki konuları birlikte kullanmalısınız:
+
+- Değişkenler ve veri tipleri
+- Tür dönüşümleri
+- Karar yapıları
+- Döngüler
+- String metotları
+- DateTime
+- ArrayList
+- try-catch veya TryParse
+- Menü tabanlı programlama
+
+Program, kullanıcı "0 - Çıkış" seçeneğini seçene kadar çalışmaya devam
+etmelidir.
+
+
+2. PROJE SENARYOSU
+------------------
+
+Bir okulda seminer, gezi, turnuva ve konser gibi etkinlikler düzenlenmektedir.
+Öğrenciler sistem üzerinden etkinlikleri görüntüleyebilmeli, etkinlik
+arayabilmeli ve uygun etkinliklere kayıt yaptırabilmelidir.
+
+Yöneticiler ise yeni etkinlik ekleyebilmeli, etkinlik bilgilerini
+güncelleyebilmeli ve etkinlikleri iptal edebilmelidir.
+
+Program bütün bilgileri ArrayList koleksiyonlarında tutmalıdır. Veri tabanı,
+dosya veya List<T> kullanılmayacaktır.
+
+
+3. KULLANILACAK ARRAYLIST KOLEKSİYONLARI
+----------------------------------------
+
+Etkinlik bilgileri için aşağıdaki koleksiyonları oluşturunuz:
+
+- etkinlikAdlari
+- etkinlikTarihleri
+- kontenjanlar
+- kayitSayilari
+- ucretler
+- etkinlikAktifMi
+
+Öğrenci kayıtları için aşağıdaki koleksiyonları oluşturunuz:
+
+- ogrenciNumaralari
+- ogrenciAdlari
+- kayitliEtkinlikIndexleri
+- kayitTarihleri
+
+ÖNEMLİ AÇIKLAMA:
+
+Paralel çalışan ArrayList koleksiyonlarında aynı indeksler aynı kaydı temsil
+etmelidir.
+
+Örneğin;
+
+etkinlikAdlari[0]
+etkinlikTarihleri[0]
+kontenjanlar[0]
+ucretler[0]
+
+değerlerinin tamamı aynı etkinliğe ait olmalıdır.
+
+Benzer biçimde;
+
+ogrenciNumaralari[2]
+ogrenciAdlari[2]
+kayitliEtkinlikIndexleri[2]
+kayitTarihleri[2]
+
+değerlerinin tamamı aynı öğrenci kaydına ait olmalıdır.
+
+Bir koleksiyondan eleman silindiğinde ilgili diğer koleksiyonlardan da aynı
+indeks silinmelidir.
+
+
+4. BAŞLANGIÇ ETKİNLİKLERİ
+-------------------------
+
+Program başladığında sistemde en az dört etkinlik bulunmalıdır:
+
+1 - Yazılım Semineri     / Kontenjan: 40 / Ücret: Ücretsiz
+2 - Müze Gezisi          / Kontenjan: 25 / Ücret: 150 TL
+3 - Satranç Turnuvası    / Kontenjan: 32 / Ücret: 50 TL
+4 - Bahar Konseri        / Kontenjan: 80 / Ücret: 200 TL
+
+Etkinlik tarihlerini bugünden sonraki tarihler olarak belirleyiniz.
+
+Her etkinliğin başlangıçtaki kayıt sayısı 0, aktiflik durumu ise true
+olmalıdır.
+
+
+5. ANA MENÜ
+-----------
+
+Program açıldığında aşağıdaki menü gösterilmelidir:
+
+========================================
+     OKUL ETKİNLİK KAYIT SİSTEMİ
+========================================
+
+1 - Etkinlikleri Listele
+2 - Etkinlik Ara
+3 - Etkinliğe Kayıt Ol
+4 - Kaydı İptal Et
+5 - Öğrencinin Kayıtlarını Göster
+6 - Yönetici Paneli
+7 - Raporlar
+0 - Çıkış
+
+Seçiminiz:
+
+Geçersiz bir seçim yapılırsa kullanıcı bilgilendirilmeli ve program kapanmadan
+ana menü yeniden gösterilmelidir.
+
+
+6. ETKİNLİKLERİ LİSTELEME
+-------------------------
+
+Kullanıcı 1 seçeneğini seçtiğinde sistemdeki bütün etkinlikler listelenmelidir.
+
+Her etkinlik için şu bilgiler gösterilmelidir:
+
+- Etkinlik numarası
+- Etkinlik adı
+- Etkinlik tarihi
+- Ücreti
+- Toplam kontenjanı
+- Kayıt sayısı
+- Kalan kontenjanı
+- Aktif veya iptal edilmiş olması
+
+Kalan kontenjan aşağıdaki formülle hesaplanmalıdır:
+
+Kalan kontenjan = Toplam kontenjan - Kayıt sayısı
+
+Etkinliğin tarihi geçmişse durum bilgisi olarak "Tarihi geçti" yazdırılmalıdır.
+
+Örnek çıktı:
+
+Etkinlik No     : 1
+Etkinlik Adı    : Yazılım Semineri
+Tarih           : 15.12.2026
+Ücret           : 0 TL
+Kontenjan       : 40
+Kalan Kontenjan : 32
+Durum           : Aktif
+
+
+7. ETKİNLİK ARAMA
+-----------------
+
+Kullanıcıdan aranacak etkinlik adı veya etkinlik adının bir bölümü alınmalıdır.
+
+Arama işleminde aşağıdaki string metotlarından yararlanabilirsiniz:
+
+- Trim()
+- ToLower()
+- ToUpper()
+- Contains()
+
+Arama büyük-küçük harf farklılığından etkilenmemelidir. Örneğin kullanıcı
+"yazılım", "YAZILIM" veya "Yazılım" yazdığında "Yazılım Semineri"
+bulunabilmelidir.
+
+Eşleşen etkinliklerin adı, tarihi, ücreti, kalan kontenjanı ve durumu ekrana
+yazdırılmalıdır. Eşleşme bulunamazsa uygun bir mesaj gösterilmelidir.
+
+
+8. ETKİNLİĞE KAYIT OLMA
+-----------------------
+
+Kullanıcı 3 seçeneğini seçtiğinde kayıt yapılabilecek etkinlikler
+listelenmelidir.
+
+Öğrenciden şu bilgiler alınmalıdır:
+
+- Öğrenci numarası
+- Adı ve soyadı
+- Katılmak istediği etkinliğin numarası
+
+Kayıt yapılmadan önce aşağıdaki kontroller gerçekleştirilmelidir:
+
+1. Öğrenci numarası boş bırakılamaz.
+2. Öğrencinin adı ve soyadı boş bırakılamaz.
+3. Etkinlik numarası sayısal olmalıdır.
+4. Etkinlik numarası sistemde bulunmalıdır.
+5. Etkinlik aktif olmalıdır.
+6. Etkinliğin tarihi geçmemiş olmalıdır.
+7. Etkinliğin kontenjanı dolmamış olmalıdır.
+8. Aynı öğrenci aynı etkinliğe ikinci defa kaydolamamalıdır.
+
+Bütün kontroller başarılı olursa öğrenci bilgileri ilgili ArrayList
+koleksiyonlarına Add() kullanılarak eklenmelidir. Ayrıca etkinliğin kayıt
+sayısı bir artırılmalıdır.
+
+Başarılı kayıt örneği:
+
+Kayıt başarıyla tamamlandı.
+
+Öğrenci  : 20260015 - Ayşe Yılmaz
+Etkinlik : Müze Gezisi
+Ücret    : 150 TL
+Kalan    : 18
+
+
+9. TEKRAR KAYIT KONTROLÜ
+------------------------
+
+Aynı öğrencinin aynı etkinliğe daha önce kayıt olup olmadığını döngü kullanarak
+kontrol ediniz.
+
+Kontrol yapılırken öğrenci numarası ile etkinlik indeksi birlikte
+karşılaştırılmalıdır.
+
+Öğrenci başka bir etkinliğe kayıt olabilir. Ancak aynı etkinliğe ikinci defa
+kayıt olamaz.
+
+
+10. KAYIT İPTALİ
+----------------
+
+Kullanıcıdan öğrenci numarası alınmalıdır.
+
+Öğrencinin kayıtlı olduğu etkinlikler listelenmeli ve kullanıcıdan iptal etmek
+istediği kaydın numarası istenmelidir.
+
+Seçilen kayıt iptal edilirken aşağıdaki koleksiyonların tamamından aynı indeks
+RemoveAt() kullanılarak silinmelidir:
+
+- ogrenciNumaralari
+- ogrenciAdlari
+- kayitliEtkinlikIndexleri
+- kayitTarihleri
+
+Ayrıca ilgili etkinliğin kayıt sayısı bir azaltılmalıdır.
+
+DİKKAT:
+
+Sadece bir ArrayList üzerinden silme işlemi yapılırsa paralel koleksiyonların
+indeksleri bozulur. Bu nedenle bütün ilgili koleksiyonlardan aynı indeks
+silinmelidir.
+
+
+11. ÖĞRENCİNİN KAYITLARINI GÖSTERME
+-----------------------------------
+
+Kullanıcıdan öğrenci numarası alınmalıdır.
+
+Öğrencinin kayıt olduğu bütün etkinlikler ekranda gösterilmelidir.
+
+Her kayıt için şu bilgiler yazdırılmalıdır:
+
+- Öğrencinin adı ve soyadı
+- Etkinlik adı
+- Etkinlik tarihi
+- Etkinlik ücreti
+- Kayıt tarihi
+
+Öğrencinin kayıtlı olduğu bütün etkinliklerin toplam ücreti de hesaplanmalıdır.
+Öğrenciye ait kayıt bulunamazsa kullanıcı bilgilendirilmelidir.
+
+
+12. YÖNETİCİ GİRİŞİ
+-------------------
+
+Yönetici paneline giriş için bir şifre belirleyiniz.
+
+Örnek şifre: 1234
+
+Yöneticiye en fazla üç şifre deneme hakkı verilmelidir. Şifre üç defa yanlış
+girilirse kullanıcı ana menüye gönderilmelidir.
+
+Şifre doğru girilirse aşağıdaki yönetici menüsü açılmalıdır:
+
+1 - Yeni Etkinlik Ekle
+2 - Etkinlik Güncelle
+3 - Etkinlik İptal Et
+4 - Etkinlikleri Listele
+0 - Ana Menüye Dön
+
+Yönetici 0 seçeneğini seçene kadar yönetici menüsü açık kalmalıdır.
+
+
+13. YENİ ETKİNLİK EKLEME
+------------------------
+
+Yöneticiden şu bilgiler alınmalıdır:
+
+- Etkinlik adı
+- Etkinlik tarihi
+- Kontenjan
+- Ücret
+
+Yeni etkinlik eklenirken aşağıdaki kontroller yapılmalıdır:
+
+- Etkinlik adı boş bırakılamaz.
+- Tarih geçmiş bir tarih olamaz.
+- Kontenjan sıfırdan büyük olmalıdır.
+- Ücret negatif olamaz.
+
+Bilgiler aşağıdaki koleksiyonlara aynı sırayla eklenmelidir:
+
+etkinlikAdlari.Add(...)
+etkinlikTarihleri.Add(...)
+kontenjanlar.Add(...)
+kayitSayilari.Add(0)
+ucretler.Add(...)
+etkinlikAktifMi.Add(true)
+
+Bütün etkinlik koleksiyonlarının Count değerleri birbirine eşit olmalıdır.
+
+
+14. ETKİNLİK GÜNCELLEME
+-----------------------
+
+Sistemdeki etkinlikler listelendikten sonra yöneticiden güncellenecek
+etkinliğin numarası alınmalıdır.
+
+Yönetici şu bilgileri değiştirebilmelidir:
+
+- Etkinlik adı
+- Etkinlik tarihi
+- Kontenjan
+- Ücret
+
+Yeni kontenjan, etkinliğe daha önce kayıt olmuş öğrenci sayısından küçük
+olamaz. Örneğin etkinliğe 15 öğrenci kayıtlıysa kontenjan 10 olarak
+değiştirilememelidir.
+
+
+15. ETKİNLİK İPTALİ
+-------------------
+
+Yönetici iptal etmek istediği etkinliği seçmelidir.
+
+Etkinlik iptal edildiğinde:
+
+- Etkinliğin aktiflik durumu false yapılmalıdır.
+- Etkinlik yeni kayıt kabul etmemelidir.
+- İptal edilen etkinliğe ait öğrenci kayıtları silinmelidir.
+- Etkinliğin kayıt sayısı 0 yapılmalıdır.
+
+İlgili öğrenci kayıtları silinirken RemoveAt() kullanılmalıdır. Döngü içinde
+eleman silerken indekslerin değişeceğine dikkat ediniz.
+
+
+16. RAPORLAR
+------------
+
+Kullanıcı "7 - Raporlar" seçeneğini seçtiğinde aşağıdaki bilgiler
+hesaplanmalıdır:
+
+GENEL BİLGİLER
+
+- Toplam etkinlik sayısı
+- Toplam öğrenci kayıt sayısı
+- Toplam tahmini gelir
+
+Toplam tahmini gelir, öğrenci kayıtlarının etkinlik ücretlerinin toplanmasıyla
+bulunmalıdır.
+
+ETKİNLİK RAPORLARI
+
+- En fazla kayıt alan etkinlik
+- En az kayıt alan etkinlik
+- Kontenjanı dolmuş etkinlikler
+- Hiç kayıt almamış etkinlikler
+- Önümüzdeki 30 gün içinde gerçekleşecek etkinlikler
+
+En fazla ve en az kayıt alan etkinlikler hazır sıralama metotları kullanılmadan
+döngüyle bulunmalıdır.
+
+
+17. HATA KONTROLLERİ
+--------------------
+
+Program aşağıdaki hatalı girişlerde kapanmamalıdır:
+
+- Menüye harf girilmesi
+- Etkinlik numarası yerine metin girilmesi
+- Kontenjan yerine metin girilmesi
+- Ücret yerine metin girilmesi
+- Geçersiz tarih girilmesi
+- Olmayan etkinliğin seçilmesi
+- Negatif ücret girilmesi
+- Sıfır veya negatif kontenjan girilmesi
+- Kontenjanı dolan etkinliğe kayıt yapılması
+- İptal edilmiş etkinliğe kayıt yapılması
+- Geçmiş etkinliğe kayıt yapılması
+- Aynı öğrencinin aynı etkinliğe tekrar kayıt olması
+
+Hata kontrollerinde try-catch, int.TryParse, decimal.TryParse ve
+DateTime.TryParse kullanılabilir.
+
+
+18. TEKNİK KURALLAR
+-------------------
+
+1. Proje konsol uygulaması olmalıdır.
+2. Projede ArrayList kullanılmalıdır.
+3. List<T>, LINQ ve veri tabanı kullanılmamalıdır.
+4. Etkinlik ve kayıt bilgilerinde paralel ArrayList yapısı kullanılmalıdır.
+5. Yeni kayıtlar Add() ile eklenmelidir.
+6. Silme işlemleri RemoveAt() ile yapılmalıdır.
+7. Koleksiyon uzunlukları Count ile kontrol edilmelidir.
+8. Uygun yerlerde tür dönüşümü yapılmalıdır.
+9. Program kullanıcı çıkış yapana kadar çalışmalıdır.
+10. Değişken isimleri anlamlı olmalıdır.
+11. Kodun önemli bölümlerine açıklama satırları eklenmelidir.
+12. Hatalı kullanıcı girişinde program kapanmamalıdır.
+13. Hazır çözüm doğrudan teslim edilmemelidir.
+14. Öğrenci yazdığı kodu açıklayabilmelidir.
+
+
+19. TESLİM ŞARTLARI
+-------------------
+
+Öğrenciler aşağıdaki dosyaları teslim etmelidir:
+
+- Proje klasörü
+- .csproj dosyası
+- Program.cs
+- Programın çalıştığını gösteren en az üç ekran görüntüsü
+
+Ekran görüntülerinde şu işlemler bulunmalıdır:
+
+1. Başarılı öğrenci kaydı
+2. Hatalı veya tekrar kayıt girişimi
+3. Raporlar ekranı
+
+
+20. DEĞERLENDİRME ÖLÇÜTLERİ
+---------------------------
+
+Ana menü ve program akışı                         :  5 puan
+ArrayList koleksiyonlarının doğru oluşturulması  : 10 puan
+Paralel koleksiyonların indeks uyumu              : 10 puan
+Etkinlikleri listeleme ve arama                   : 10 puan
+Öğrenci kayıt işlemi                              : 15 puan
+Kontenjan ve tekrar kayıt kontrolü                : 10 puan
+Kayıt iptali ve RemoveAt() kullanımı              : 10 puan
+Yönetici paneli                                   : 10 puan
+Raporlama işlemleri                               : 10 puan
+Hata kontrolleri                                  :  5 puan
+Kod düzeni ve açıklama satırları                  :  5 puan
+                                                   --------
+TOPLAM                                             : 100 puan
+
+
+21. BONUS ÖZELLİKLER
+--------------------
+
+Aşağıdaki özellikler zorunlu değildir:
+
+- Etkinlikleri tarihe göre sıralama
+- Etkinlikleri ücrete göre sıralama
+- Öğrenci numarasını kısmen gizleme
+- Ücretsiz etkinlikleri ayrıca listeleme
+- Doluluk oranını yüzde olarak gösterme
+- Konsol renkleri kullanma
+- Silme ve iptal işlemlerinde kullanıcıdan onay alma
+
+Bonus özellikler temel gereksinimlerdeki eksik puanların yerine geçmez.
+
+Başarılar.
